@@ -1,6 +1,6 @@
 Summary: Scalable distributed SCM
 Name: mercurial
-Version: 0.9.3
+Version: 0.9.4
 Release: %mkrel 1
 Source0: http://www.selenic.com/mercurial/release/%{name}-%{version}.tar.bz2
 URL: http://www.selenic.com/mercurial/
