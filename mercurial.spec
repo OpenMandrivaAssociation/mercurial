@@ -6,7 +6,6 @@ Source0: http://www.selenic.com/mercurial/release/%{name}-%{version}.tar.bz2
 URL: http://www.selenic.com/mercurial/
 License: GPL
 Group: Development/Other
-BuildRoot: %{_tmppath}/%{name}-buildroot
 BuildRequires: python-devel
 BuildRequires: xmlto
 BuildRequires: asciidoc
