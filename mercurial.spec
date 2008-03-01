@@ -1,16 +1,17 @@
-Summary: Scalable distributed SCM
-Name: mercurial
-Version: 0.9.5
-Release: %mkrel 1
-Source0: http://www.selenic.com/mercurial/release/%{name}-%{version}.tar.bz2
+Summary:   A fast, lightweight distributed source control management system 
+Name:      mercurial
+Version:   0.9.5
+Release:   %mkrel 2
+License: GPLv2
+Group: Development/Tools
 URL: http://www.selenic.com/mercurial/
-License: GPL
-Group: Development/Other
-BuildRoot: %{_tmppath}/%{name}-buildroot
+Source0: http://www.selenic.com/mercurial/release/%{name}-%{version}.tar.bz2
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 BuildRequires: python-devel
 BuildRequires: xmlto
 BuildRequires: asciidoc
 BuildRequires: rcs
+Provides: hg = %{version}-%{release}
 
 %description
 Mercurial is a fast, lightweight source control management system
@@ -27,43 +28,55 @@ projects. Features include:
     * Integrated stand-alone web interface
     * Small Python codebase
 
+%files -f %{name}.files
+%defattr(-,root,root,-)
+%doc CONTRIBUTORS COPYING doc/README doc/hg*.txt doc/hg*.html doc/ja *.cgi
+%_mandir/man*/*
+%{_sysconfdir}/bash_completion.d/mercurial.sh
+%{_datadir}/zsh/site-functions/_mercurial
+%{_datadir}/emacs/site-lisp/mercurial.el
+%{_datadir}/xemacs/site-packages/lisp/mercurial.el
+%{_bindir}/hgk
+%{_bindir}/hg-ssh
+%{_bindir}/hg-viz
+%{_bindir}/git-rev-tree
+%{_bindir}/mercurial-convert-repo
+%dir %{_sysconfdir}/mercurial
+%dir %{_sysconfdir}/mercurial/hgrc.d
+
+#--------------------------------------------------------------------
+
 %prep
 %setup -q
 
 %build
-python setup.py build
-
-# build doc
-(
-cd doc
-%make
-)
+make all
 
 %install
 rm -rf $RPM_BUILD_ROOT
-python setup.py install --root $RPM_BUILD_ROOT
+python setup.py install -O1 --root $RPM_BUILD_ROOT --prefix %{_prefix} --record=%{name}.files
+make install-doc DESTDIR=$RPM_BUILD_ROOT MANDIR=%{_mandir}
 
-mkdir -p $RPM_BUILD_ROOT%_mandir/man1
-install -m644 doc/*.1 $RPM_BUILD_ROOT%_mandir/man1/
+install contrib/hgk          $RPM_BUILD_ROOT%{_bindir}
+install contrib/convert-repo $RPM_BUILD_ROOT%{_bindir}/mercurial-convert-repo
+install contrib/hg-ssh       $RPM_BUILD_ROOT%{_bindir}
+install contrib/git-viz/{hg-viz,git-rev-tree} $RPM_BUILD_ROOT%{_bindir}
 
-mkdir -p $RPM_BUILD_ROOT%_mandir/man5
-install -m644 doc/*.5 $RPM_BUILD_ROOT%_mandir/man5/
+bash_completion_dir=$RPM_BUILD_ROOT%{_sysconfdir}/bash_completion.d
+mkdir -p $bash_completion_dir
+install -m 644 contrib/bash_completion $bash_completion_dir/mercurial.sh
 
-%check
-# to avoid problems with nfs
-export TMPDIR=/tmp
-cd tests
-./run-tests.py
+zsh_completion_dir=$RPM_BUILD_ROOT%{_datadir}/zsh/site-functions
+mkdir -p $zsh_completion_dir
+install -m 644 contrib/zsh_completion $zsh_completion_dir/_mercurial
+
+lisp_dir=$RPM_BUILD_ROOT%{_datadir}/emacs/site-lisp
+mkdir -p $lisp_dir
+install -m 644 contrib/mercurial.el $lisp_dir
+xlisp_dir=$RPM_BUILD_ROOT%{_datadir}/xemacs/site-packages/lisp
+mkdir -p $xlisp_dir
+install -m 644 contrib/mercurial.el $xlisp_dir
+mkdir -p $RPM_BUILD_ROOT/%{_sysconfdir}/mercurial/hgrc.d
 
 %clean
 rm -rf $RPM_BUILD_ROOT
-
-%files
-%defattr(-,root,root)
-%doc COPYING CONTRIBUTORS README
-%{py_platsitedir}/*
-%_bindir/hg*
-%_mandir/man*/*
-
-
-
