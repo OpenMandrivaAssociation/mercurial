@@ -3,7 +3,7 @@ Name:      mercurial
 Version:   0.9.5
 Release:   %mkrel 2
 License: GPLv2
-Group: Development/Tools
+Group:   Development/Other
 URL: http://www.selenic.com/mercurial/
 Source0: http://www.selenic.com/mercurial/release/%{name}-%{version}.tar.bz2
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
