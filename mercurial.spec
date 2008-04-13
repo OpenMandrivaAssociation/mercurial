@@ -1,16 +1,15 @@
 Summary:   A fast, lightweight distributed source control management system 
 Name:      mercurial
-Version:   0.9.5
-Release:   %mkrel 2
-License: GPLv2
-Group:   Development/Other
-URL: http://www.selenic.com/mercurial/
-Source0: http://www.selenic.com/mercurial/release/%{name}-%{version}.tar.bz2
+Version:   1.0
+Release:   %mkrel 1
+License:   GPLv2
+Group:     Development/Other
+URL: 	   http://www.selenic.com/mercurial/
+Source0:   http://www.selenic.com/mercurial/release/%{name}-%{version}.tar.lzma
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 BuildRequires: python-devel
 BuildRequires: xmlto
 BuildRequires: asciidoc
-BuildRequires: rcs
 Provides: hg = %{version}-%{release}
 
 %description
@@ -18,33 +17,15 @@ Mercurial is a fast, lightweight source control management system
 designed for efficient handling of very large distributed
 projects. Features include:
 
-    * O(1) delta-compressed file storage and retrieval scheme
-    * Complete cross-indexing of file and changesets for efficient exploration
+  * O(1) delta-compressed file storage and retrieval scheme
+  * Complete cross-indexing of file and changesets for efficient exploration
     of project history
-    * Robust SHA1-based integrity checking and append-only storage model
-    * Decentralized development model with arbitrary merging between trees
-    * High-speed HTTP-based network merge protocol
-    * Easy-to-use command-line interface
-    * Integrated stand-alone web interface
-    * Small Python codebase
-
-%files -f %{name}.files
-%defattr(-,root,root,-)
-%doc CONTRIBUTORS COPYING doc/README doc/hg*.txt doc/hg*.html doc/ja *.cgi
-%_mandir/man*/*
-%{_sysconfdir}/bash_completion.d/mercurial.sh
-%{_datadir}/zsh/site-functions/_mercurial
-%{_datadir}/emacs/site-lisp/mercurial.el
-%{_datadir}/xemacs/site-packages/lisp/mercurial.el
-%{_bindir}/hgk
-%{_bindir}/hg-ssh
-%{_bindir}/hg-viz
-%{_bindir}/git-rev-tree
-%{_bindir}/mercurial-convert-repo
-%dir %{_sysconfdir}/mercurial
-%dir %{_sysconfdir}/mercurial/hgrc.d
-
-#--------------------------------------------------------------------
+  * Robust SHA1-based integrity checking and append-only storage model
+  * Decentralized development model with arbitrary merging between trees
+  * High-speed HTTP-based network merge protocol
+  * Easy-to-use command-line interface
+  * Integrated stand-alone web interface
+  * Small Python codebase
 
 %prep
 %setup -q
@@ -80,3 +61,19 @@ mkdir -p $RPM_BUILD_ROOT/%{_sysconfdir}/mercurial/hgrc.d
 
 %clean
 rm -rf $RPM_BUILD_ROOT
+
+%files -f %{name}.files
+%defattr(-,root,root,-)
+%doc CONTRIBUTORS COPYING doc/README doc/hg*.txt doc/hg*.html doc/ja *.cgi
+%dir %{_sysconfdir}/mercurial
+%dir %{_sysconfdir}/mercurial/hgrc.d
+%_mandir/man*/*
+%{_sysconfdir}/bash_completion.d/mercurial.sh
+%{_datadir}/zsh/site-functions/_mercurial
+%{_datadir}/emacs/site-lisp/mercurial.el
+%{_datadir}/xemacs/site-packages/lisp/mercurial.el
+%{_bindir}/hgk
+%{_bindir}/hg-ssh
+%{_bindir}/hg-viz
+%{_bindir}/git-rev-tree
+%{_bindir}/mercurial-convert-repo
