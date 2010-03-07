@@ -1,6 +1,6 @@
 Summary:   A fast, lightweight distributed source control management system
 Name:      mercurial
-Version:   1.4.3
+Version:   1.5
 Release:   %mkrel 1
 License:   GPLv2+
 Group:     Development/Other
@@ -80,7 +80,7 @@ install -m 644 contrib/mergetools.hgrc $RPM_BUILD_ROOT/%{_sysconfdir}/mercurial/
 
 %files -f %{name}.files
 %defattr(-,root,root,-)
-%doc CONTRIBUTORS COPYING doc/README doc/hg*.txt doc/hg*.html doc/ja *.cgi contrib/*.fcgi
+%doc CONTRIBUTORS COPYING doc/README doc/hg*.txt doc/hg*.html *.cgi contrib/*.fcgi
 %doc %attr(644,root,root) contrib/*.svg contrib/sample.hgrc
 %dir %{_sysconfdir}/mercurial
 %dir %{_sysconfdir}/mercurial/hgrc.d
