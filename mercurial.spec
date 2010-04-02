@@ -48,7 +48,7 @@ projects. Major features include:
 
 %install
 %__rm -rf $RPM_BUILD_ROOT
-%__python setup.py install -O1 --root $RPM_BUILD_ROOT --prefix %{_prefix} --record=%{name}.files
+PYTHONDONTWRITEBYTECODE= %__python setup.py install -O1 --root $RPM_BUILD_ROOT --prefix %{_prefix} --record=%{name}.files
 make install-doc DESTDIR=$RPM_BUILD_ROOT MANDIR=%{_mandir}
 
 install contrib/hgk          $RPM_BUILD_ROOT%{_bindir}
