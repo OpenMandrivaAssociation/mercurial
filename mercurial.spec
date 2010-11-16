@@ -1,7 +1,7 @@
 Summary:   A fast, lightweight distributed source control management system
 Name:      mercurial
-Version:   1.6.4
-Release:   %mkrel 3
+Version:   1.7.1
+Release:   %mkrel 1
 License:   GPLv2+
 Group:     Development/Other
 URL: 	   http://www.selenic.com/mercurial/
@@ -66,10 +66,12 @@ install -m 644 contrib/zsh_completion $zsh_completion_dir/_mercurial
 lisp_dir=$RPM_BUILD_ROOT%{_datadir}/emacs/site-lisp
 mkdir -p $lisp_dir
 install -m 644 contrib/mercurial.el $lisp_dir
+install -m 644 contrib/mq.el $lisp_dir
 
 xlisp_dir=$RPM_BUILD_ROOT%{_datadir}/xemacs/site-packages/lisp
 mkdir -p $xlisp_dir
 install -m 644 contrib/mercurial.el $xlisp_dir
+install -m 644 contrib/mq.el $xlisp_dir
 
 mkdir -p $RPM_BUILD_ROOT/%{_sysconfdir}/mercurial/hgrc.d
 install -m 644 contrib/mergetools.hgrc $RPM_BUILD_ROOT/%{_sysconfdir}/mercurial/hgrc.d/mergetools.rc
@@ -87,8 +89,8 @@ install -m 644 contrib/mergetools.hgrc $RPM_BUILD_ROOT/%{_sysconfdir}/mercurial/
 %{_mandir}/man*/*
 %{_sysconfdir}/bash_completion.d/mercurial.sh
 %{_datadir}/zsh/site-functions/_mercurial
-%{_datadir}/emacs/site-lisp/mercurial.el
-%{_datadir}/xemacs/site-packages/lisp/mercurial.el
+%{_datadir}/emacs/site-lisp/*.el
+%{_datadir}/xemacs/site-packages/lisp/*.el
 %{_bindir}/hgk
 %{_bindir}/hg-ssh
 %{_bindir}/mercurial-convert-repo
