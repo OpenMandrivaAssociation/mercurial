@@ -10,6 +10,7 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 BuildRequires: python-devel
 BuildRequires: xmlto
 BuildRequires: asciidoc
+BuildRequires: python-docutils
 Provides: hg = %{version}-%{release}
 
 %description
