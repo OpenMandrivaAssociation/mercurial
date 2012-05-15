@@ -1,12 +1,18 @@
-Summary:   A fast, lightweight distributed source control management system
-Name:      mercurial
-Version:   2.1.2
-Release:   %mkrel 1
-License:   GPLv2+
-Group:     Development/Other
-URL: 	   http://www.selenic.com/mercurial/
-Source0:   http://www.selenic.com/mercurial/release/%{name}-%{version}.tar.gz
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
+%define		rel	1
+
+Summary:	A fast, lightweight distributed source control management system
+Name:		mercurial
+Version:	2.2.1
+%if %mdkversion < 201100
+Release:	%mkrel %rel
+%else
+Release:	%rel
+%endif
+License:	GPLv2+
+Group:		Development/Other
+URL:		http://www.selenic.com/mercurial/
+Source0:	http://www.selenic.com/mercurial/release/%{name}-%{version}.tar.gz
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root
 BuildRequires: python-devel
 BuildRequires: xmlto
 BuildRequires: asciidoc
