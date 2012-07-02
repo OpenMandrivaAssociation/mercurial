@@ -2,7 +2,7 @@
 
 Summary:	A fast, lightweight distributed source control management system
 Name:		mercurial
-Version:	2.2.2
+Version:	2.2.3
 %if %mdkversion < 201100
 Release:	%mkrel %rel
 %else
