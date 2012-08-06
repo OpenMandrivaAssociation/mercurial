@@ -2,7 +2,7 @@
 
 Summary:	A fast, lightweight distributed source control management system
 Name:		mercurial
-Version:	2.2.3
+Version:	2.3
 %if %mdkversion < 201100
 Release:	%mkrel %rel
 %else
@@ -22,30 +22,7 @@ Provides: hg = %{version}-%{release}
 %description
 Mercurial is a fast, lightweight source control management system
 designed for efficient handling of very large distributed
-projects. Major features include:
-
-* Extremely high-performance delta-compressed storage scheme
-* Optimized for disk layout and access efficiency
-* Complete cross-indexing of files and changesets
-* Bandwidth and CPU efficient HTTP and SSH sync protocols 
-* Distributed development model supports unlimited numbers of developers
-* Allows arbitrary merging between developer branches
-* Doesn't significantly degrade with large numbers of files or changesets
-* No waiting for locks! 
-* SHA1 integrity checking on repository data
-* Append-only storage model with transaction journalling
-* Fast full-repository verification
-* Convenient backup 
-* Most commands are familiar to users of CVS and other systems
-* Built-in command help
-* Integrated stand-alone web interface (example)
-* Works with various GUI tools 
-* Runs on UNIX, MacOS X, and Windows
-* Conversion tools available for many popular SCMs
-* Allows a variety of usage models
-* Supports user-defined hooks and extensions 
-* Source code available under the GPL license
-* Actively community supported and developed
+projects. 
 
 %prep
 %setup -q
