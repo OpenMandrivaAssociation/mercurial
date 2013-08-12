@@ -2,5 +2,6 @@ removed_sources:
   mercurial-2.2.2.tar.gz: 72070531f173ccb4394b227914c45678c963ebaa
   mercurial-2.5.1.tar.gz: 91daddc64fa3cb3cb0bd85876030ced0d4ff7e5b
   mercurial-2.5.4.tar.gz: 9a387a041fe808833fe3512229eb35c6d5274188
-sources:
   mercurial-2.6.2.tar.gz: 861c1df8f50347c8381df3aa7e296113ecf24ae6
+sources:
+  mercurial-2.7.tar.gz: 185be3422fd8e14167a6b188c89cc1e24be894f9
