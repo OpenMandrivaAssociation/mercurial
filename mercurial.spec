@@ -1,21 +1,22 @@
-Summary:	A fast, lightweight distributed source control management system
-Name:		mercurial
-Version:	2.7.2
-Release:	5
-License:	GPLv2+
-Group:		Development/Other
-Url:		http://www.selenic.com/mercurial/
-Source0:	http://www.selenic.com/mercurial/release/%{name}-%{version}.tar.gz
-BuildRequires:	asciidoc
-BuildRequires:	python-docutils
-BuildRequires:	xmlto
-BuildRequires:	pkgconfig(python)
-Provides:	hg = %{version}-%{release}
+Summary:   A fast, lightweight distributed source control management system
+Name:      mercurial
+Version:   2.9
+Release:   1
+License:   GPLv2+
+Group:     Development/Other
+URL: 	   http://www.selenic.com/mercurial/
+Source0:   http://www.selenic.com/mercurial/release/%{name}-%{version}.tar.gz
+BuildRequires: python-devel
+BuildRequires: xmlto
+BuildRequires: asciidoc
+BuildRequires: python-docutils
+Provides: hg = %{version}-%{release}
 
 %description
 Mercurial is a fast, lightweight source control management system
 designed for efficient handling of very large distributed
 projects. 
+
 
 %prep
 %setup -q
@@ -24,14 +25,8 @@ projects.
 %make all
 
 %install
-PYTHONDONTWRITEBYTECODE= %__python setup.py install -O1 \
-	--root %{buildroot} \
-	--prefix %{_prefix} \
-	--record=%{name}.files
-
-make install-doc \
-	DESTDIR=%{buildroot} \
-	MANDIR=%{_mandir}
+PYTHONDONTWRITEBYTECODE= %__python setup.py install -O1 --root %{buildroot} --prefix %{_prefix} --record=%{name}.files
+make install-doc DESTDIR=%{buildroot} MANDIR=%{_mandir}
 
 install contrib/hgk          %{buildroot}%{_bindir}
 install contrib/convert-repo %{buildroot}%{_bindir}/mercurial-convert-repo
