@@ -6,7 +6,7 @@ License:   GPLv2+
 Group:     Development/Other
 URL: 	   http://www.selenic.com/mercurial/
 Source0:   http://www.selenic.com/mercurial/release/%{name}-%{version}.tar.gz
-BuildRequires: python-devel
+BuildRequires: pkgconfig(python2)
 BuildRequires: xmlto
 BuildRequires: asciidoc
 BuildRequires: python-docutils
