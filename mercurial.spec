@@ -9,7 +9,7 @@ Source0:   http://www.selenic.com/mercurial/release/%{name}-%{version}.tar.gz
 BuildRequires: pkgconfig(python2)
 BuildRequires: xmlto
 BuildRequires: asciidoc
-BuildRequires: python-docutils
+BuildRequires: python2-docutils
 Provides: hg = %{version}-%{release}
 
 %description
