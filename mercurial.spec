@@ -22,10 +22,12 @@ projects.
 %setup -q
 
 %build
+sed -i 's/PYTHON=python/PYTHON=python2/g' Makefile doc/Makefile
+export PYTHON=%{_bindir}/python2
 %make all
 
 %install
-PYTHONDONTWRITEBYTECODE= %__python setup.py install -O1 --root %{buildroot} --prefix %{_prefix} --record=%{name}.files
+PYTHONDONTWRITEBYTECODE= %__python2 setup.py install -O1 --root %{buildroot} --prefix %{_prefix} --record=%{name}.files
 make install-doc DESTDIR=%{buildroot} MANDIR=%{_mandir}
 
 install contrib/hgk          %{buildroot}%{_bindir}
@@ -67,4 +69,3 @@ install -m 644 contrib/mergetools.hgrc %{buildroot}/%{_sysconfdir}/mercurial/hgr
 %{_bindir}/hgk
 %{_bindir}/hg-ssh
 %{_bindir}/mercurial-convert-repo
-
