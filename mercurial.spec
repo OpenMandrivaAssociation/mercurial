@@ -1,7 +1,7 @@
 Summary:   A fast, lightweight distributed source control management system
 Name:      mercurial
-Version:   3.1.1
-Release:   3
+Version:   3.8.3
+Release:   1
 License:   GPLv2+
 Group:     Development/Other
 URL: 	   http://www.selenic.com/mercurial/
@@ -31,7 +31,6 @@ PYTHONDONTWRITEBYTECODE= %__python2 setup.py install -O1 --root %{buildroot} --p
 make install-doc DESTDIR=%{buildroot} MANDIR=%{_mandir}
 
 install contrib/hgk          %{buildroot}%{_bindir}
-install contrib/convert-repo %{buildroot}%{_bindir}/mercurial-convert-repo
 install contrib/hg-ssh       %{buildroot}%{_bindir}
 
 bash_completion_dir=%{buildroot}%{_sysconfdir}/bash_completion.d
@@ -52,15 +51,9 @@ mkdir -p $xlisp_dir
 install -m 644 contrib/mercurial.el $xlisp_dir
 install -m 644 contrib/mq.el $xlisp_dir
 
-mkdir -p %{buildroot}/%{_sysconfdir}/mercurial/hgrc.d
-install -m 644 contrib/mergetools.hgrc %{buildroot}/%{_sysconfdir}/mercurial/hgrc.d/mergetools.rc
-
 %files -f %{name}.files
 %doc CONTRIBUTORS COPYING doc/README doc/hg*.txt doc/hg*.html *.cgi contrib/*.fcgi
-%doc %attr(644,root,root) contrib/*.svg contrib/sample.hgrc
-%dir %{_sysconfdir}/mercurial
-%dir %{_sysconfdir}/mercurial/hgrc.d
-%config(noreplace) %{_sysconfdir}/mercurial/hgrc.d/mergetools.rc
+%doc %attr(644,root,root) contrib/*.svg
 %{_mandir}/man*/*
 %{_sysconfdir}/bash_completion.d/mercurial.sh
 %{_datadir}/zsh/site-functions/_mercurial
@@ -68,4 +61,3 @@ install -m 644 contrib/mergetools.hgrc %{buildroot}/%{_sysconfdir}/mercurial/hgr
 %{_datadir}/xemacs/site-packages/lisp/*.el
 %{_bindir}/hgk
 %{_bindir}/hg-ssh
-%{_bindir}/mercurial-convert-repo
