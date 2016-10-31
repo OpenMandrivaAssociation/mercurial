@@ -1,11 +1,12 @@
+%define pre rc
 Summary:   A fast, lightweight distributed source control management system
 Name:      mercurial
-Version:   3.8.3
+Version:   4.0
 Release:   1
 License:   GPLv2+
 Group:     Development/Other
 URL: 	   http://www.selenic.com/mercurial/
-Source0:   http://www.selenic.com/mercurial/release/%{name}-%{version}.tar.gz
+Source0:   http://www.selenic.com/mercurial/release/%{name}-%{version}%{?pre:-%{pre}}.tar.gz
 BuildRequires: pkgconfig(python2)
 BuildRequires: xmlto
 BuildRequires: asciidoc
@@ -19,7 +20,7 @@ projects.
 
 
 %prep
-%setup -q
+%setup -qn %{name}-%{version}%{?pre:-%{pre}}
 
 %build
 sed -i 's/PYTHON=python/PYTHON=python2/g' Makefile doc/Makefile
