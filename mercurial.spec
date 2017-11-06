@@ -1,12 +1,11 @@
-%define pre rc
 Summary:   A fast, lightweight distributed source control management system
 Name:      mercurial
-Version:   4.0
+Version:   4.4
 Release:   1
 License:   GPLv2+
 Group:     Development/Other
 URL: 	   http://www.selenic.com/mercurial/
-Source0:   http://www.selenic.com/mercurial/release/%{name}-%{version}%{?pre:-%{pre}}.tar.gz
+Source0:   http://www.selenic.com/mercurial/release/%{name}-%{version}.tar.gz
 BuildRequires: pkgconfig(python2)
 BuildRequires: xmlto
 BuildRequires: asciidoc
@@ -20,7 +19,7 @@ projects.
 
 
 %prep
-%setup -qn %{name}-%{version}%{?pre:-%{pre}}
+%setup -qn %{name}-%{version}
 
 %build
 sed -i 's/PYTHON=python/PYTHON=python2/g' Makefile doc/Makefile
@@ -62,3 +61,4 @@ install -m 644 contrib/mq.el $xlisp_dir
 %{_datadir}/xemacs/site-packages/lisp/*.el
 %{_bindir}/hgk
 %{_bindir}/hg-ssh
+%{_libdir}/python*/site-packages/mercurial/__modulepolicy*
