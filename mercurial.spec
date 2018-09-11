@@ -1,6 +1,6 @@
 Summary:   A fast, lightweight distributed source control management system
 Name:      mercurial
-Version:   4.7
+Version:   4.7.1
 Release:   1
 License:   GPLv2+
 Group:     Development/Other
