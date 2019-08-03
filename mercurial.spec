@@ -1,15 +1,15 @@
 Summary:   A fast, lightweight distributed source control management system
 Name:      mercurial
-Version:   5.0
+Version:   5.1
 Release:   1
 License:   GPLv2+
 Group:     Development/Other
 URL: 	   http://www.selenic.com/mercurial/
 Source0:   http://www.selenic.com/mercurial/release/%{name}-%{version}.tar.gz
-BuildRequires: pkgconfig(python2)
+BuildRequires: pkgconfig(python3)
 BuildRequires: xmlto
 BuildRequires: asciidoc
-BuildRequires: python2-docutils
+BuildRequires: python-docutils
 Provides: hg = %{version}-%{release}
 
 %description
@@ -22,12 +22,12 @@ projects.
 %setup -qn %{name}-%{version}
 
 %build
-sed -i 's/PYTHON=python/PYTHON=python2/g' Makefile doc/Makefile
-export PYTHON=%{_bindir}/python2
+export HGPYTHON3=1
 %make all
 
 %install
-PYTHONDONTWRITEBYTECODE= %__python2 setup.py install -O1 --root %{buildroot} --prefix %{_prefix} --record=%{name}.files
+export HGPYTHON3=1
+PYTHONDONTWRITEBYTECODE= %__python setup.py install -O1 --root %{buildroot} --prefix %{_prefix} --record=%{name}.files
 make install-doc DESTDIR=%{buildroot} MANDIR=%{_mandir}
 
 install contrib/hgk          %{buildroot}%{_bindir}
@@ -62,3 +62,4 @@ install -m 644 contrib/mq.el $xlisp_dir
 %{_bindir}/hgk
 %{_bindir}/hg-ssh
 %{_libdir}/python*/site-packages/mercurial/__modulepolicy*
+%{_libdir}/python*/site-packages/mercurial/__pycache__
