@@ -1,8 +1,9 @@
-%global debug_package %{nil}
+# Build system has issues with debugsource creation
+%global _empty_manifest_terminate_build 0
 
 Summary:   A fast, lightweight distributed source control management system
 Name:      mercurial
-Version:	5.8
+Version:	5.8.1
 Release:	1
 License:   GPLv2+
 Group:     Development/Other
@@ -21,11 +22,11 @@ projects.
 
 
 %prep
-%setup -qn %{name}-%{version}
+%autosetup -p1
 
 %build
 export HGPYTHON3=1
-%make all
+%make_build all
 
 %install
 export HGPYTHON3=1
