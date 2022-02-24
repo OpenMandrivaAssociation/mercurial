@@ -3,7 +3,7 @@
 
 Summary:   A fast, lightweight distributed source control management system
 Name:      mercurial
-Version:	6.0.2
+Version:	6.0.3
 Release:	1
 License:   GPLv2+
 Group:     Development/Other
@@ -30,7 +30,7 @@ export HGPYTHON3=1
 
 %install
 export HGPYTHON3=1
-PYTHONDONTWRITEBYTECODE= %__python setup.py install -O1 --root %{buildroot} --prefix %{_prefix} --record=%{name}.files
+PYTHONDONTWRITEBYTECODE= %__python setup.py install -O1 --root %{buildroot} --prefix %{_prefix}
 make install-doc DESTDIR=%{buildroot} MANDIR=%{_mandir}
 
 install contrib/hgk          %{buildroot}%{_bindir}
@@ -54,7 +54,7 @@ mkdir -p $xlisp_dir
 install -m 644 contrib/mercurial.el $xlisp_dir
 install -m 644 contrib/mq.el $xlisp_dir
 
-%files -f %{name}.files
+%files
 %doc CONTRIBUTORS COPYING doc/README doc/hg*.txt doc/hg*.html *.cgi contrib/*.fcgi
 %doc %attr(644,root,root) contrib/*.svg
 %{_mandir}/man*/*
@@ -62,7 +62,11 @@ install -m 644 contrib/mq.el $xlisp_dir
 %{_datadir}/zsh/site-functions/_mercurial
 %{_datadir}/emacs/site-lisp/*.el
 %{_datadir}/xemacs/site-packages/lisp/*.el
+%{_bindir}/hg
 %{_bindir}/hgk
 %{_bindir}/hg-ssh
-%{_libdir}/python*/site-packages/mercurial/__modulepolicy*
-%{_libdir}/python*/site-packages/mercurial/__pycache__
+%{_libdir}/python*/site-packages/hgdemandimport
+%{_libdir}/python*/site-packages/hgext
+%{_libdir}/python*/site-packages/hgext3rd
+%{_libdir}/python*/site-packages/mercurial
+%{_libdir}/python*/site-packages/mercurial*.egg-info
