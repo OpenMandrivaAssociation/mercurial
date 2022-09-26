@@ -3,7 +3,7 @@
 
 Summary:   A fast, lightweight distributed source control management system
 Name:      mercurial
-Version:	6.1.3
+Version:	6.2.2
 Release:	1
 License:   GPLv2+
 Group:     Development/Other
@@ -36,14 +36,6 @@ make install-doc DESTDIR=%{buildroot} MANDIR=%{_mandir}
 install contrib/hgk          %{buildroot}%{_bindir}
 install contrib/hg-ssh       %{buildroot}%{_bindir}
 
-bash_completion_dir=%{buildroot}%{_sysconfdir}/bash_completion.d
-mkdir -p $bash_completion_dir
-install -m 644 contrib/bash_completion $bash_completion_dir/mercurial.sh
-
-zsh_completion_dir=%{buildroot}%{_datadir}/zsh/site-functions
-mkdir -p $zsh_completion_dir
-install -m 644 contrib/zsh_completion $zsh_completion_dir/_mercurial
-
 lisp_dir=%{buildroot}%{_datadir}/emacs/site-lisp
 mkdir -p $lisp_dir
 install -m 644 contrib/mercurial.el $lisp_dir
@@ -58,8 +50,8 @@ install -m 644 contrib/mq.el $xlisp_dir
 %doc CONTRIBUTORS COPYING doc/README doc/hg*.txt doc/hg*.html *.cgi contrib/*.fcgi
 %doc %attr(644,root,root) contrib/*.svg
 %{_mandir}/man*/*
-%{_sysconfdir}/bash_completion.d/mercurial.sh
-%{_datadir}/zsh/site-functions/_mercurial
+%{_datadir}/bash-completion/completions/hg
+%{_datadir}/zsh/site-functions/_hg
 %{_datadir}/emacs/site-lisp/*.el
 %{_datadir}/xemacs/site-packages/lisp/*.el
 %{_bindir}/hg
