@@ -7,7 +7,7 @@ Version:	6.8.1
 Release:	1
 License:   GPLv2+
 Group:     Development/Other
-URL: 	   http://www.selenic.com/mercurial/
+URL: 	   https://www.selenic.com/mercurial/
 Source0:   http://www.selenic.com/mercurial/release/%{name}-%{version}.tar.gz
 BuildRequires: pkgconfig(python3)
 BuildRequires: xmlto
