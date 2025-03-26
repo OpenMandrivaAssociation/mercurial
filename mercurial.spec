@@ -12,6 +12,7 @@ BuildRequires: pkgconfig(python3)
 BuildRequires: xmlto
 BuildRequires: asciidoc
 BuildRequires: python-docutils
+BuildRequires: python%{pyver}dist(setuptools-scm)
 Provides: hg = %{version}-%{release}
 
 %description
