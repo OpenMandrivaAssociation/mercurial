@@ -8,6 +8,7 @@ License:   GPLv2+
 Group:     Development/Other
 URL: 	   https://www.selenic.com/mercurial/
 Source0:   http://www.selenic.com/mercurial/release/%{name}-%{version}.tar.gz
+BuildRequires: make
 BuildRequires: pkgconfig(python3)
 BuildRequires: xmlto
 BuildRequires: asciidoc
