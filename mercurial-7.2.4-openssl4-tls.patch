@@ -1,0 +1,58 @@
+diff -Nru mercurial-7.2.4.orig/mercurial/debugcommands.py mercurial-7.2.4/mercurial/debugcommands.py
+--- mercurial-7.2.4.orig/mercurial/debugcommands.py	2026-08-11 13:35:55.780053600 +0200
++++ mercurial-7.2.4/mercurial/debugcommands.py	2026-08-12 21:09:10.336550061 +0200
+@@ -2076,10 +2076,10 @@
+ 
+     # These are warnings, not errors. So don't increment problem count. This
+     # may change in the future.
+-    if b'tls1.2' not in security:
++    if b'tls1.3' not in security:
+         fm.plain(
+             _(
+-                b'  TLS 1.2 not supported by Python install; '
++                b'  TLS 1.3 not supported by Python install; '
+                 b'network connections lack modern security\n'
+             )
+         )
+diff -Nru mercurial-7.2.4.orig/mercurial/sslutil.py mercurial-7.2.4/mercurial/sslutil.py
+--- mercurial-7.2.4.orig/mercurial/sslutil.py	2026-08-11 13:35:55.773381700 +0200
++++ mercurial-7.2.4/mercurial/sslutil.py	2026-08-12 21:09:10.336161316 +0200
+@@ -99,14 +99,10 @@
+                 % b' '.join(sorted(configprotocols)),
+             )
+ 
+-    # We default to TLS 1.2+ because TLS 1.0 has known vulnerabilities (like
+-    # BEAST and POODLE). We allow users to downgrade to TLS 1.0+ via config
+-    # options in case a legacy server is encountered.
+-
+-    # setup.py checks that TLS 1.2 is present, so the following assert should
+-    # not fail.
+-    assert supportedprotocols - {b'tls1.0', b'tls1.1'}
+-    defaultminimumprotocol = b'tls1.2'
++    # OpenSSL 4+ only advertises TLS 1.3. Default the floor to TLS 1.3.
++    # Users can still lower it via hostsecurity.minimumprotocol if needed.
++    assert b'tls1.3' in supportedprotocols
++    defaultminimumprotocol = b'tls1.3'
+ 
+     key = b'minimumprotocol'
+     minimumprotocol = ui.config(b'hostsecurity', key, defaultminimumprotocol)
+diff -Nru mercurial-7.2.4.orig/setup.py mercurial-7.2.4/setup.py
+--- mercurial-7.2.4.orig/setup.py	2026-08-11 13:35:55.769072800 +0200
++++ mercurial-7.2.4/setup.py	2026-08-12 21:09:10.336027444 +0200
+@@ -12,12 +12,11 @@
+ import sysconfig
+ import tempfile
+ 
+-if not ssl.HAS_TLSv1_2:
++# OpenSSL 4+ / current Python: only TLS 1.3 is advertised (HAS_TLSv1_2 is false).
++if not getattr(ssl, 'HAS_TLSv1_3', False):
+     error = """
+-The `ssl` module does not advertise support for TLS 1.2.
+-Please make sure that your Python installation was compiled against an OpenSSL
+-version enabling these features (likely this requires the OpenSSL version to
+-be at least 1.0.1).
++The `ssl` module does not advertise support for TLS 1.3.
++Mercurial requires a Python build against OpenSSL 4 (or equivalent) with TLS 1.3.
+ """
+     print(error, file=sys.stderr)
+     sys.exit(1)

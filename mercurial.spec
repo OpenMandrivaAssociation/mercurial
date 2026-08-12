@@ -8,11 +8,14 @@ License:   GPLv2+
 Group:     Development/Other
 URL: 	   https://www.selenic.com/mercurial/
 Source0:   http://www.selenic.com/mercurial/release/%{name}-%{version}.tar.gz
+# OpenSSL 4+: require/default TLS 1.3 (no TLS 1.2)
+Patch0:    mercurial-7.2.4-openssl4-tls.patch
 BuildRequires: make
 BuildRequires: pkgconfig(python3)
 BuildRequires: xmlto
 BuildRequires: asciidoc
 BuildRequires: python-docutils
+BuildRequires: python%{pyver}dist(setuptools)
 BuildRequires: python%{pyver}dist(setuptools-scm)
 Provides: hg = %{version}-%{release}
 
