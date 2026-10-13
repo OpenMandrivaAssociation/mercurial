@@ -3,18 +3,20 @@
 Summary:   A fast, lightweight distributed source control management system
 Name:      mercurial
 Version:	7.2.4
-Release:	1
+Release:	2
 License:   GPLv2+
 Group:     Development/Other
 URL: 	   https://www.selenic.com/mercurial/
 Source0:   http://www.selenic.com/mercurial/release/%{name}-%{version}.tar.gz
 # OpenSSL 4+: require/default TLS 1.3 (no TLS 1.2)
 Patch0:    mercurial-7.2.4-openssl4-tls.patch
+# Python 3.15 removed distutils; setup.py still imports it
+Patch1:    mercurial-7.2.4-python315-distutils.patch
 BuildRequires: make
 BuildRequires: pkgconfig(python3)
 BuildRequires: xmlto
 BuildRequires: asciidoc
-BuildRequires: python-docutils
+BuildRequires: python%{pyver}dist(docutils)
 BuildRequires: python%{pyver}dist(setuptools)
 BuildRequires: python%{pyver}dist(setuptools-scm)
 Provides: hg = %{version}-%{release}
@@ -30,10 +32,12 @@ projects.
 
 %build
 export HGPYTHON3=1
+export SETUPTOOLS_SCM_PRETEND_VERSION=%{version}
 %make_build
 
 %install
 export HGPYTHON3=1
+export SETUPTOOLS_SCM_PRETEND_VERSION=%{version}
 PYTHONDONTWRITEBYTECODE= %__python setup.py install -O1 --root %{buildroot} --prefix %{_prefix}
 make install-doc DESTDIR=%{buildroot} MANDIR=%{_mandir}
 
